@@ -47,8 +47,10 @@ app.use(logger('dev'));
 
 const index = require('./routes/index');
 const auth = require('./routes/auth');
+const food = require('./routes/food');
 app.use('/', index);
 app.use('/auth', auth);
+app.use('/api', food);
 
 // Uncomment this line for production
 // app.get('/*', (req, res) => res.sendFile(__dirname + '/public/index.html'));
