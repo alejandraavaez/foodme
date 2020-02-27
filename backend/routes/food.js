@@ -9,7 +9,7 @@ const uploadCloud = require('../config/cloudinary');
 
 //Create 
 router.post('/food', uploadCloud.single('photoURL'), (req, res, next) => {
-  console.log('file2', req.file);
+  console.log('file2', req.files);
   
     const { name, price, description } = req.body
     const { _id } = req.user
@@ -27,7 +27,7 @@ router.post('/food', uploadCloud.single('photoURL'), (req, res, next) => {
 
 //Read all
 router.get('/food', (req, res, next) => {
-    Food.find()
+    Food.find({owner: {$ne: req.user._id}})
     .then(( food ) => res.status(200).json({ food }))
     .catch((err) => res.status(500).json({ err }));
 })
@@ -54,8 +54,15 @@ router.post('/food/upload', uploadCloud.single('photoURL'),
 //Delete
 router.delete('/food/:id', (req, res, next) => {
     const { id } = req.params
-    Food.findOneAndDelete( id )
-    res.status(200).json( { msg: 'food deleted' })
+    Food.findByIdAndDelete({_id:id})
+    .then(response => {
+      User.update({ _id: req.user._id }, {$pull:{createdFood:id}})
+      .then(response => {
+        res.status(200).json( { msg: 'food deleted' })
+      })
+    } )
+    .catch(err => res.send(err))
+    
     }
 )
 

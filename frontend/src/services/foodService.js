@@ -8,7 +8,6 @@ const foodService ={
         return await service.post( '/api/food', food )
     },
     allFood: async (food) =>{ 
-       
         return await service.get( '/api/food' , food )
     },
     detailFood: async (idFood) => {
