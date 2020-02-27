@@ -1,24 +1,40 @@
 const express = require('express');
 const router = express.Router();
 const Food = require('../models/Food');
+const User = require('../models/User');
 const uploadCloud = require('../config/cloudinary');
 
 
 //CRUD
 
 //Create 
-router.post('/food',(req, res, next) => {
+router.post('/food', uploadCloud.single('photoURL'), (req, res, next) => {
+  console.log('file2', req.file);
+  
     const { name, price, description } = req.body
     const { _id } = req.user
-    const newFood = { name, price, description, owner: _id }
+    const { secure_url } = req.file
+    const newFood = { name, price, description, owner: _id, image: secure_url}
+    console.log( 'creating', newFood )
     Food.create(newFood)
-    .then((food) => res.status(201).json({ food }))
+    .then((food) => {
+      User.update({ _id }, {$push:{createdFood:food._id}}).then(res => console.log(res)).catch(err => console.log(err))
+      res.status(201).json({ food })
+    })
+    .catch((err) => console.log(err))
+    //res.status(500).json({ err }));
+})
+
+//Read all
+router.get('/food', (req, res, next) => {
+    Food.find()
+    .then(( food ) => res.status(200).json({ food }))
     .catch((err) => res.status(500).json({ err }));
 })
 
-//Read
-router.get('/food', (req, res, next) => {
-    Food.findById(req.food._id)
+//Read one
+router.get('/food/:id', (req, res, next) => {
+    Food.findById(req.params.id)
     .then(( food ) => res.status(200).json({ food }))
     .catch((err) => res.status(500).json({ err }));
 })

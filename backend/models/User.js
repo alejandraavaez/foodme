@@ -15,10 +15,12 @@ const userSchema = new Schema(
     adress: String,
     foodRestriction:[String],
     rating: Number,
-    createdFood:{
+    createdFood:[
+      {
       type: Schema.Types.ObjectId,
       ref: 'Food'
-    }
+      }
+      ]
   },
   {
     timestamps: true,

@@ -27,7 +27,7 @@ function Login() {
                          </form>
                              <button onClick={context.handleSubmitSignup}>Sign up</button>
                          <div>
-                             <p>Already have an account? <Link to="/login">Log in</Link></p>
+                            <p>Already have an account? <Link to="/login">Log in</Link></p>
                          </div>
                      </section>
                  </div>
@@ -40,46 +40,3 @@ export default Login
 
 
 
-// import React, { Component } from 'react'
-// import { Link } from 'react-router-dom'
-// import authService from '../../services/authService'
-
-// class Signup extends Component{
-//     state={
-//         email: '',
-//         username: '',
-//         email: '',
-//         password: ''
-//     }
-//     handleChange=({target: {name,value}}) => this.setState({[name]: value})
-
-//     handleSubmit= async () => {
-//         const res = await authService.signup(this.state).catch(err => alert('User already exists: '+err))
-//         if( res && res.data ) return this.props.history.push('/login')
-//     }
-//     render(){
-//         return(
-//         <div className="container">
-//             <section>
-//                 <h2>Sign up</h2>
-//                 <form>
-//                     <label>Email</label>
-//                     <input name="email" value={this.state.email} onChange={this.handleChange} />
-//                     <label>Username</label>
-//                     <input name="username" value={this.state.username} onChange={this.handleChange} />
-//                     <label>Password</label>
-//                     <input name="password" value={this.state.password} onChange={this.handleChange} />
-//                     <label>Phone</label>
-//                     <input name="phone" value={this.state.phone} onChange={this.handleChange} />
-//                 </form>
-//                     <button onClick={this.handleSubmit}>Sign up</button>
-//                 <div>
-//                     <p>Already have an account? <Link to="/login">Log in</Link></p>
-//                 </div>
-//             </section>
-//         </div>
-//         )
-//     }
-// }
-
-// export default Signup

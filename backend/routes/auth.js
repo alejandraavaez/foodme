@@ -21,8 +21,14 @@ router.get('/logout', (req, res, next) => {
   res.status(200).json({ user });
 });
 
-router.get('/profile', isAuth, (req, res, next) => {
+router.get('/home', isAuth, (req, res, next) => {
   User.findById(req.user._id)
+    .then((user) => res.status(200).json({ user }))
+    .catch((err) => res.status(500).json({ err }));
+});
+
+router.get('/profile', isAuth, (req, res, next) => {
+  User.findById(req.user._id).populate('createdFood')
     .then((user) => res.status(200).json({ user }))
     .catch((err) => res.status(500).json({ err }));
 });

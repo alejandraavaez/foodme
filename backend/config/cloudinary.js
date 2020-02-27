@@ -16,7 +16,7 @@ const storage = cloudinaryStorage({
   cloudinary,
   folder: 'lastday',
   allowedFormats: ['jpg', 'png'],
-  filename: (req, file, cb) => {
+  filename: (req, file, cb) => {    
     cb(null, file.originalname)
   }
 })

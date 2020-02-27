@@ -1,36 +1,39 @@
-import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect, useContext } from 'react'
 import authService from '../../services/authService'
+import { myContext } from '../../context'
+import CardFood  from '../cardfood/CardFood'
 
-class Profile extends Component{
-    
-    componentDidMount = async ()=>{
-        const res = await authService.loggedin().catch( ()=> this.props.history.push('/login'))
-        console.log('aqui',res);
-    }
 
-    logout = async () => {
-        await authService.logout()
-        this.props.history.push('/login')
-    }
+function Profile(props) {
+  const context = useContext(myContext)
+  useEffect(() => {
+    authService.loggedin().catch( () => props.history.push('/login'))
+    .then(res => {
+      context.getProfile()
+    })
+    },[])
 
-    render() {
-        return (
-            <div className="container">
-                <section>
-                    <h2>Profile</h2>
-                    <form>
-                        <h4>Username</h4>
-        
-                    </form>
-                    <Link to="/login">Log out</Link><br/>
-                    <Link to="/add">+</Link>
-                </section>
-                <section>
-                </section>   
-            </div>
+  return (
+    <myContext.Consumer>
+      { context => {
+          const { userLogged } = context.state
+        if(userLogged)
+          return(
+            <>
+            <div>
+              {(context.state.userLogged) ? (
+                context.state.userLogged.createdFood.map( food => (
+                  <CardFood food={food} />
+                ))
+                
+              ): (<p>Loading...</p>)}
+              <h1>hola</h1>
+              </div>
+            </>
         )
-    }
+}}
+    </myContext.Consumer>
+  )
 }
 
 export default Profile

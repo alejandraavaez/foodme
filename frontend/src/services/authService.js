@@ -12,15 +12,18 @@ const authService ={
         
         return await service.post( '/auth/login', user )
     },
+    home: async (user) => {
+        return await service.get('/auth/home')
+    },
     profile: async (user) => {
-        return await service.get('/auth/profile')
+      return await service.get('/auth/profile')
     },
     loggedin: async () => {
         return await service.get('/auth/isLoggedin')
+    },
+    logout: async (user) => {
+        return await service.get( '/auth/logout', user )
     }
-    // logout: async (user) => {
-    //     return await service.get( '/auth/logout', user )
-    // }
 }
 
 export default authService
