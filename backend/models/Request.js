@@ -2,27 +2,27 @@ const { Schema, model } = require('mongoose')
 
 const requestSchema = new Schema(
     {
-        userGive:[
+        userGive:
             {
                 type: Schema.Types.ObjectId,
                 ref: 'User',
             }
-        ],
-        userReceive:[
+        ,
+        userReceive:
             {
                 type: Schema.Types.ObjectId,
                 ref: 'User',  
             }
-        ],
-        food:[
+        ,
+        food:
             {
                 type: Schema.Types.ObjectId,
                 ref: 'Food',
-            }
-        ],
+            },
         status:{
-            enum:['pendiente', 'aceptado', 'rechazado'],
-            default: 'pendiente'
+            type: String,
+            enum:['waiting', 'accepted', 'denied'],
+            default: 'waiting'
         }
     }
 )

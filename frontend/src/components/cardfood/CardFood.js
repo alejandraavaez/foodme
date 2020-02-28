@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import foodService from '../../services/foodService'
 import { Box, Image } from '@chakra-ui/core';
 import { withRouter } from 'react-router-dom';
+import requestService from '../../services/requestService';
 
 
 
@@ -10,6 +11,11 @@ function CardFood({food, history, match}) {
   const deleteFood = () => {
     foodService.deleteFood(food._id)
     .then(res => history.push('/home'))
+    .catch(err => console.log(err))
+  }
+  const requestFood = () => {
+    requestService.requestFood(food._id)
+    .then(res => console.log(res))
     .catch(err => console.log(err))
   }
     return (
@@ -33,7 +39,7 @@ function CardFood({food, history, match}) {
               {food.price}
             </Box>
           </Box>
-          { match.path === '/home' ? <button onClick={deleteFood}>Solicitar</button>
+          { match.path === '/home' ? <button onClick={requestFood}>Solicitar</button>
           : <button onClick={deleteFood}>Delete</button>}
         </Box>
       

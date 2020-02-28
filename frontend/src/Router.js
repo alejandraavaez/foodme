@@ -21,7 +21,8 @@ const Router = () => (
       <Route exact path="/login" component={Login} />
       <Route exact path="/home" component={Home} />
       <Route exact path="/food" component={FormNewFood}  />
-      <Route extact path="/profile" component={Profile} />
+      <Route exact path="/profile" component={Profile} />
+
       {/* <Route exact path="/logout" component={Logout} /> */}
       <Route component={NotFound} />
     </Switch>

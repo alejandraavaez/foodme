@@ -20,7 +20,11 @@ const userSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: 'Food'
       }
-      ]
+      ],
+    requestedFood:[{
+      type: Schema.Types.ObjectId,
+      ref: 'Request'
+    }]
   },
   {
     timestamps: true,

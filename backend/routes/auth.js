@@ -28,8 +28,23 @@ router.get('/home', isAuth, (req, res, next) => {
 });
 
 router.get('/profile', isAuth, (req, res, next) => {
-  User.findById(req.user._id).populate('createdFood')
-    .then((user) => res.status(200).json({ user }))
+  User.findById(req.user._id)
+  .populate( {
+      path: 'requestedFood',
+      model: 'Request',
+      populate: {
+        path: 'food'
+      }
+    }
+    ).populate('createdFood')
+      .populate({
+        path: 'requestedFood',
+          model: 'Request',
+          populate: {
+            path: 'userReceive'
+          }
+      })
+    .then((user) => res.status(200).json({user}))
     .catch((err) => res.status(500).json({ err }));
 });
 

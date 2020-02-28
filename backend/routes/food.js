@@ -18,7 +18,8 @@ router.post('/food', uploadCloud.single('photoURL'), (req, res, next) => {
     console.log( 'creating', newFood )
     Food.create(newFood)
     .then((food) => {
-      User.update({ _id }, {$push:{createdFood:food._id}}).then(res => console.log(res)).catch(err => console.log(err))
+      User.update({ _id }, {$push:{createdFood:food._id}})
+      .then(res => console.log(res)).catch(err => console.log(err))
       res.status(201).json({ food })
     })
     .catch((err) => console.log(err))
