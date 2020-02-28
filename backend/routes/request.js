@@ -11,12 +11,13 @@ router.get('/request/:id', (req,res, next) => {
   Request.create({ food, userReceive})
   .then(requestCreated => {
     User.update({ _id:userReceive }, {$push:{requestedFood: requestCreated._id}})
-    .then(response  =>  res.status(201).json(requestCreated))
+    Food.update({_id: food}, {request: requestCreated._id})
+    .then(response  =>  res.status(201).json(response))
   })
   .catch(err => console.log(err))
 })
 
-//owner acepta y el userReceive obtiene feedback
+//owner acepta 
 router.get('/request/:id/:status', (req, res, next) => {
   const { id, status } = req.params
   Request.update({ _id:id},{ status })
@@ -25,6 +26,9 @@ router.get('/request/:id/:status', (req, res, next) => {
     res.status(201).json(request)
   })
 })
+
+//el userReceive obtiene feedback
+
 
 
 module.exports = router

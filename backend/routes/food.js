@@ -11,10 +11,10 @@ const uploadCloud = require('../config/cloudinary');
 router.post('/food', uploadCloud.single('photoURL'), (req, res, next) => {
   console.log('file2', req.files);
   
-    const { name, price, description } = req.body
+    const { name, description, availableTime, duration } = req.body
     const { _id } = req.user
     const { secure_url } = req.file
-    const newFood = { name, price, description, owner: _id, image: secure_url}
+    const newFood = { name, description, availableTime, duration, owner: _id, image: secure_url}
     console.log( 'creating', newFood )
     Food.create(newFood)
     .then((food) => {
@@ -28,14 +28,18 @@ router.post('/food', uploadCloud.single('photoURL'), (req, res, next) => {
 
 //Read all
 router.get('/food', (req, res, next) => {
-    Food.find({owner: {$ne: req.user._id}})
-    .then(( food ) => res.status(200).json({ food }))
+  console.log('user', req.user);
+  
+    Food.find({owner: {$ne: req.user._id}}).populate('owner')
+    .then(( food ) => {
+      res.status(200).json({ food })
+    })
     .catch((err) => res.status(500).json({ err }));
 })
 
 //Read one
 router.get('/food/:id', (req, res, next) => {
-    Food.findById(req.params.id)
+    Food.findById({_id:req.params.id}).populate('request')
     .then(( food ) => res.status(200).json({ food }))
     .catch((err) => res.status(500).json({ err }));
 })

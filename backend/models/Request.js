@@ -12,19 +12,22 @@ const requestSchema = new Schema(
             {
                 type: Schema.Types.ObjectId,
                 ref: 'User',  
+                autopopulate: true
             }
         ,
         food:
             {
                 type: Schema.Types.ObjectId,
                 ref: 'Food',
+                autopopulate: true
             },
         status:{
             type: String,
-            enum:['waiting', 'accepted', 'denied'],
+            enum:['waiting', 'requested', 'accepted', 'denied'],
             default: 'waiting'
-        }
+        },
     }
 )
 
+requestSchema.plugin(require('mongoose-autopopulate'));
 module.exports = model('Request', requestSchema)

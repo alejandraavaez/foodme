@@ -4,8 +4,8 @@ const User = require('../models/User');
 const passport = require('../config/passport');
 
 router.post('/signup', (req, res, next) => {
-  const { email, name, username, password } = req.body
-  const newUser = { email, name, username }
+  const { email, name, username, password, phone, adress } = req.body
+  const newUser = { email, name, username, phone, adress }
   User.register(newUser, password)
     .then((user) => res.status(201).json({ user }))
     .catch((err) => res.status(500).json({ err }));
@@ -29,23 +29,50 @@ router.get('/home', isAuth, (req, res, next) => {
 
 router.get('/profile', isAuth, (req, res, next) => {
   User.findById(req.user._id)
-  .populate( {
-      path: 'requestedFood',
-      model: 'Request',
-      populate: {
-        path: 'food'
-      }
-    }
-    ).populate('createdFood')
-      .populate({
-        path: 'requestedFood',
-          model: 'Request',
-          populate: {
-            path: 'userReceive'
-          }
-      })
-    .then((user) => res.status(200).json({user}))
-    .catch((err) => res.status(500).json({ err }));
+  // .populate( {
+  //     path: 'requestedFood',
+  //     populate: {
+  //       path: 'food',
+  //     }
+  //   }
+    // )
+    // .populate({
+    //   path:'createdFood',
+    //   populate:[{
+    //     path: 'request',
+    //     populate:{
+    //       path: 'userReceive'
+    //     }
+    //   }]
+    // })
+    // .populate({
+    //   path: 'requestedFood'
+    // })
+    
+    // .populate('requestedFood')
+    //   .populate({
+    //     path: 'requestedFood',
+    //       model: 'Request',
+    //       populate: {
+    //         path: 'food'
+    //       }
+    //   })
+      // .populate({
+      //   path: 'requestedFood',
+      //   populate: {
+      //     path:'food'
+      //   }
+      // })
+    .then((user) => {
+      console.log('populate', user);
+      
+      res.status(200).json({user})
+    })
+    .catch((err) => {
+      console.log('err populate', err);
+      
+      res.status(500).json({ err })
+    });
 });
 
 router.get('/isLoggedin', (req, res, next)=> {

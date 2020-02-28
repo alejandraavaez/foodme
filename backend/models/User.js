@@ -18,13 +18,15 @@ const userSchema = new Schema(
     createdFood:[
       {
       type: Schema.Types.ObjectId,
-      ref: 'Food'
+      ref: 'Food',
+      autopopulate: true,
       }
       ],
     requestedFood:[{
       type: Schema.Types.ObjectId,
-      ref: 'Request'
-    }]
+      ref: 'Request',
+      autopopulate: true
+    }],
   },
   {
     timestamps: true,
@@ -32,6 +34,7 @@ const userSchema = new Schema(
   }
 );
 
+userSchema.plugin(require('mongoose-autopopulate'));
 userSchema.plugin(PLM, { usernameField: 'email' });
 
 module.exports = model('User', userSchema);

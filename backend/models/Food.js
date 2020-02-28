@@ -7,18 +7,26 @@ const foodSchema = new Schema(
         price: Number,
         image: String,
         description: String,
+        availableTime: String,
+        duration: String,
         foodContent: [
-            {
-                type: String,
-            }
+          {
+            type: String,
+          }
         ],
-        owner:[
-            {
-            type: Schema.Types.ObjectId,
-            ref: 'User'
+        owner:
+        {
+          type: Schema.Types.ObjectId,
+          ref: 'User',
+          autopopulate: true
+            },
+            request: {
+              type: Schema.Types.ObjectId,
+              ref:'Request',
+              autopopulate: true
             }
-        ]
     }
 )
 
+foodSchema.plugin(require('mongoose-autopopulate'));
 module.exports = model('Food', foodSchema)
