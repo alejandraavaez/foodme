@@ -35,16 +35,17 @@ class Context extends Component {
     }
 
     handleSubmit= async () => {
-        const res = await authService.login(this.state.signup_in).catch(err => alert('Email or password incorrect'))
+        const res = await authService.login(this.state.signup_in).catch(err => console.log(err))
         console.log(res);
         if( res && res.data ) {
             this.setState({ userLogged:res.data.user })
-            return this.props.history.push('/home')}
-        
+            return true
+          }
+        return false
     }
 
     handleSubmitSignup= async () => {
-        const res = await authService.signup(this.state.signup_in).catch(err => alert('User already exists:'+err))
+        const res = await authService.signup(this.state.signup_in).catch(err => console.log(err))
         if( res && res.data ) return this.props.history.push('/login')
     }
 

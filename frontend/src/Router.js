@@ -7,14 +7,17 @@ import Home from './components/home/Home';
 import Profile from './components/profile/Profile';
 // import Logout from './components/logout/Logout';
 import NotFound from './components/404/NotFound.js';
-import { ThemeProvider } from '@chakra-ui/core';
+import { ThemeProvider, CSSReset } from '@chakra-ui/core';
 import Context from './context'
 import FormNewFood from './components/formData/formData';
+import Navbar from './components/navbar/Navbar';
 
 const Router = () => (
   <BrowserRouter>
     <Context>
     <ThemeProvider>
+      <CSSReset />
+      <Navbar />
     <Switch>
       <Route exact path="/" component={Index} />
       <Route exact path="/signup" component={Signup} />

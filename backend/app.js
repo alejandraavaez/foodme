@@ -52,7 +52,7 @@ const request = require('./routes/request');
 app.use('/', index);
 app.use('/auth', auth);
 app.use('/api', food);
-app.use('/api', request)
+app.use('/api', request);
 
 // Uncomment this line for production
 // app.get('/*', (req, res) => res.sendFile(__dirname + '/public/index.html'));

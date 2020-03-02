@@ -47,7 +47,7 @@ router.get('/profile', isAuth, (req, res, next) => {
 });
 
 router.put('/profile', isAuth, (req, res, next) => {
-  const { username, email, phone, address } 
+  const { username, email, phone, address } = req.user
   User.findByIdAndUpdate({_id:req.user._id}, {username, email, phone, address})
   .then((user) => {
 
