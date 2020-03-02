@@ -4,8 +4,13 @@ const User = require('../models/User');
 const passport = require('../config/passport');
 
 router.post('/signup', (req, res, next) => {
-  const { email, name, username, password, phone, adress } = req.body
-  const newUser = { email, name, username, phone, adress }
+  const { email, name, username, password, phone, adress, longitude, latitude } = req.body
+  const coordinates = [
+    longitude,
+    latitude
+  ]
+  const newUser = { email, name, username, phone, adress, location:coordinates  }
+  console.log('nuevo usuario', {newUser})
   User.register(newUser, password)
     .then((user) => res.status(201).json({ user }))
     .catch((err) => res.status(500).json({ err }));
@@ -29,40 +34,6 @@ router.get('/home', isAuth, (req, res, next) => {
 
 router.get('/profile', isAuth, (req, res, next) => {
   User.findById(req.user._id)
-  // .populate( {
-  //     path: 'requestedFood',
-  //     populate: {
-  //       path: 'food',
-  //     }
-  //   }
-    // )
-    // .populate({
-    //   path:'createdFood',
-    //   populate:[{
-    //     path: 'request',
-    //     populate:{
-    //       path: 'userReceive'
-    //     }
-    //   }]
-    // })
-    // .populate({
-    //   path: 'requestedFood'
-    // })
-    
-    // .populate('requestedFood')
-    //   .populate({
-    //     path: 'requestedFood',
-    //       model: 'Request',
-    //       populate: {
-    //         path: 'food'
-    //       }
-    //   })
-      // .populate({
-      //   path: 'requestedFood',
-      //   populate: {
-      //     path:'food'
-      //   }
-      // })
     .then((user) => {
       console.log('populate', user);
       
@@ -74,6 +45,14 @@ router.get('/profile', isAuth, (req, res, next) => {
       res.status(500).json({ err })
     });
 });
+
+router.put('/profile', isAuth, (req, res, next) => {
+  const { username, email, phone, address } 
+  User.findByIdAndUpdate({_id:req.user._id}, {username, email, phone, address})
+  .then((user) => {
+
+  })
+})
 
 router.get('/isLoggedin', (req, res, next)=> {
   return (req.user) ? res.status(200).send(req.user) : res.status(500).send(null)

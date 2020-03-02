@@ -3,6 +3,7 @@ import authService from '../../services/authService'
 import { myContext } from '../../context'
 import CardFood  from '../cardfood/CardFood'
 import Request from '../request/Request'
+import { Link } from 'react-router-dom'
 
 
 function Profile(props) {
@@ -14,24 +15,36 @@ function Profile(props) {
     })
     },[])
 
+  
   return (
     <myContext.Consumer>
       { context => {
           const { userLogged } = context.state
-        if(userLogged)
+          
+          
           return(
             <>
+            
             <div>
-              <h1>hola</h1>
+              <Link to="/home">Home</Link><br/>
+              <Link to="/food">+</Link>
+
               {(context.state.userLogged) ? (
                 context.state.userLogged.createdFood.map( food => (
+                  <>
+                  <h1>Comidas posteadas</h1>
                   <CardFood food={food} />
+                  </>
                   ))
                 
               ) : (<p>Loading...</p>)}
+
                {(context.state.userLogged) ? (
                 context.state.userLogged.requestedFood.map( request => (
+                  <>
+                  <h1>Solicitudes</h1>
                   <Request request={request} />
+                  </>
                   ))
               ) : (<p>Loading...</p>)}
               

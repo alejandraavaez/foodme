@@ -12,8 +12,11 @@ function Login() {
     return (
         <myContext.Consumer>
             { context => (
-                 <div className="container">
+                 <div className="signup_in">
                      <section>
+                      <h1>Welcome</h1>
+                      <h1>Back</h1>
+                        <div className="infobox">
                          <h2>Log in</h2>
                          <form>
                              <label>Email</label>
@@ -23,6 +26,7 @@ function Login() {
                          </form>
                          <button onClick={context.handleSubmit}>Log in</button>
                          <p>Don't have an account yet? <Link to="/signup">Sign up</Link></p>
+                         </div>
                      </section>
                  </div>
             )}

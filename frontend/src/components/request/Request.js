@@ -1,30 +1,29 @@
 import React, { useContext } from 'react'
 import foodService from '../../services/foodService'
-import { Box, Image, AvatarGroup, Avatar, Text } from '@chakra-ui/core';
+import { Box, Image, AvatarGroup, Avatar, Text, Badge } from '@chakra-ui/core';
 import { withRouter } from 'react-router-dom';
 import requestService from '../../services/requestService';
 import { myContext } from '../../context';
 
 
 
-function Request({request, history, match}) {
+
+function Request({request, history, match, food}) {
   const context = useContext(myContext)
+  let color = 'green';
 
-    const acceptRequest = () => {
-      requestService.acceptRequest(request._id)
-      .then(res => context.getProfile() )
-      .catch( err => console.log(err) )
+    console.log('requesttt', request);
+    
+    switch(request.status){
+      case 'waiting': color='yellow'; break;
+      case 'accepted': color='green'; break;
+      case 'denied': color='red'; break;
     }
-
-    const denyRequest = () => {
-      requestService.denyRequest(request._id)
-      .then(res => context.getProfile() )
-      .catch( err => console.log(err) )
-    }
-
+    console.log(request.status, color);
+    
     return (
     <>    
-      {request ? (
+      {request && request.food ? (
         <Box maxW="sm" borderWidth="1px" rounded="lg" overflow="hidden">
           <Image w="100%" src={request.food.image} alt={request.food.name} />
 
@@ -37,25 +36,40 @@ function Request({request, history, match}) {
               isTruncated
             >
               {request.food.name}
+              <Badge variantColor={color}>{request.status}</Badge>
+              {request.status==='accepted' ?(
+                <>
+                <p>aqui va toda la info</p>
+                {request.food.owner && request.food.description ?(
+                  <>
+                  <p>{request.food.owner.name}</p>
+                  <p>{request.food.owner.username}</p> 
+                  <p>{request.food.owner.availableTime}</p>
+                  <p>{request.food.description}</p>
+                  </>
+                ):(null)}
+                {/* <a href={`https://wa.me/${food.request.userReceive.phone}`} target='_blank'>whatsapp</a><br /><br />
+                <a href={`tel:${food.request.userReceive.phone}`} target='_blank'>call phone</a> */}
+                </>
+              ):(null)}
             </Box>
 
             <Box>
               {request.food.price}
             </Box>
-            <Box>
-            <AvatarGroup size="md" max={2}>
-              <Avatar name={request.userReceive.username}  />
-            </AvatarGroup>
-            <Text>{request.userReceive.username}</Text>
-            <Text>{request.status}</Text>
-            </Box>
+           
           </Box>
-          {request.status == 'waiting' ? (
+          {/* {request.status == 'waiting' ? (
             <>
             <button onClick={acceptRequest}>Accept</button>
             <button onClick={denyRequest}>Deny</button>
 </>
-          ) : (null)}
+          ) : (request.status === 'accepted' ? (
+            <>
+            <a href={`https://wa.me/${request.userReceive.phone}`} target='_blank'>whatsapp</a><br /><br />
+            <a href={`tel:${request.userReceive.phone}`} target='_blank'>call phone</a>
+            </>
+          ):(<p>Loading...</p>))} */}
          
         </Box>
       

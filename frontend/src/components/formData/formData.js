@@ -28,8 +28,10 @@ function FormNewFood(props) {
                              <input name="name" value={context.state.newFood.name} onChange={context.handleChangenewFood} />
                              <label>Image</label>
                              <input type="file" name="photoURL" onChange={context.handleChangenewFood} />
-                             <label>Price</label>
-                             <input name="price" value={context.state.newFood.price} onChange={context.handleChangenewFood} />
+                             <label>Available Time</label>
+                             <input name="availableTime" value={context.state.newFood.availableTime} onChange={context.handleChangenewFood} />
+                             <label>Days duration</label>
+                             <input name="duration" value={context.state.newFood.duration} onChange={context.handleChangenewFood} />
                              <label>Description</label>
                              <input name="description" value={context.state.newFood.description} onChange={context.handleChangenewFood} />
                          </form>

@@ -9,6 +9,7 @@ class Context extends Component {
         signup_in: { 
             userdescription: '',
             name: '',
+            username: '',
             password: '',
             email: '',
             phone:'',

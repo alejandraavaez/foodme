@@ -12,7 +12,7 @@ const userSchema = new Schema(
     },
     biography: String,
     phone: String,
-    adress: String,
+    address: String,
     foodRestriction:[String],
     rating: Number,
     createdFood:[
@@ -27,6 +27,12 @@ const userSchema = new Schema(
       ref: 'Request',
       autopopulate: true
     }],
+    location: {
+      type: { 
+        type: String 
+      },
+      coordinates: [Number]
+    },
   },
   {
     timestamps: true,

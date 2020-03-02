@@ -12,22 +12,22 @@ function Login() {
     return (
         <myContext.Consumer>
             { context => (
-                  <div className="container">
+                  <div className="signup_in">
                      <section>
+                        <h1>Create</h1>
+                        <h1>Account</h1>
+                       <div className="infobox">
                          <h2>Sign up</h2>
                          <form>
-                             <label>Email</label>
-                             <input name="email" value={context.state.signup_in.email} onChange={context.handleChange} />
-                             <label>Username</label>
-                             <input name="username" value={context.state.signup_in.username} onChange={context.handleChange} />
-                             <label>Password</label>
-                             <input name="password" value={context.state.signup_in.password} onChange={context.handleChange} />
-                             <label>Phone</label>
-                             <input name="phone" value={context.state.signup_in.phone} onChange={context.handleChange} />
+                             <input name="email" value={context.state.signup_in.email} onChange={context.handleChange} placeholder="Email"/>  
+                             <input name="name" value={context.state.signup_in.name} onChange={context.handleChange} placeholder="Name"/>
+                             <input name="password" value={context.state.signup_in.password} onChange={context.handleChange} placeholder="Password" />
+                             <input name="phone" value={context.state.signup_in.phone} onChange={context.handleChange} placeholder="Phone" />
                          </form>
-                             <button onClick={context.handleSubmitSignup}>Sign up</button>
+                             <button onClick={context.handleSubmitSignup}>SIGN UP</button>
                          <div>
                             <p>Already have an account? <Link to="/login">Log in</Link></p>
+                         </div>
                          </div>
                      </section>
                  </div>
