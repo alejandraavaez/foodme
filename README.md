@@ -9,9 +9,33 @@ _Foodme comenzó cuando fui a estudiar a Canadá, siempre me he preguntado qué 
 Mira *https://foodme-app.netlify.com/login** para conocer mas sobre el proyecto.
 
 ![alt text](https://github.com/alejandraavaez/foodme/blob/master/Herofoodme-min.jpg)
+
+## ¿Cómo se desarrollo la idea? 🚀
+
+* Features
+
+***Signup***  
+
+***Login***  
+
+***Home***  in this section you can find shared items from other users.
+
+***Shared***  this section will display the created items of the user, such as the requests from other users.
+
+***Create***  here is a section for the creation of new items.
+
+***Found***  here is to visualize your requests status.
+
+***Profile***  the section of profile will display your usage of the app, with some badges of consumption and money saving.
+
+## ¿Cómo usar la aplicación?
+
+* To use this app, you will need to clone this repo:
+`https://github.com/alejandraavaez/foodme.git`
+
 ## Construido con 🛠️
 
-_React, MongoDB, NodeJs, Express, Chakra, CSS_
+_React, MongoDB, NodeJs, Express, Cloudinary, Chakra, CSS_
 
 ## Colaboradores ✒️
 
