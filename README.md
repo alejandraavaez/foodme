@@ -28,10 +28,18 @@ Mira *https://foodme-app.netlify.com/login** para conocer mas sobre el proyecto.
 
 ***Profile***  the section of profile will display your usage of the app, with some badges of consumption and money saving.
 
-## ¿Cómo usar la aplicación?
+## ¿Cómo usar la aplicación? ⚙️
 
-* To use this app, you will need to clone this repo:
+* Para utilizar la aplicación hay que clonar el repo:
 `https://github.com/alejandraavaez/foodme.git`
+
+* Para el backend se deben de correr los siguientes comandos, primero entrar a la carpeta del backend:
+`npm i`
+`npm run dev`
+
+* Para el frontend se deben de correr los siguientes comandos, primero entrar a la carpeta del frontend:
+`npm i`
+`npm start`
 
 ## Construido con 🛠️
 
