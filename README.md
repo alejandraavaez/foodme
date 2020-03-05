@@ -18,15 +18,16 @@ Mira *https://foodme-app.netlify.com/login** para conocer mas sobre el proyecto.
 
 ***Login***  
 
-***Home***  in this section you can find shared items from other users.
+***Home***  En esta sección encontrarás los articulos compartidos por otros usuarios.
 
-***Shared***  this section will display the created items of the user, such as the requests from other users.
+***Shared***  La sección de compartido mustra los articulos creados por usuario que está inciado en sesión, así como las peticiones de otros usuarios. 
 
-***Create***  here is a section for the creation of new items.
+***Create***  Crear es un sección para añadir nuevos articulos.
 
-***Found***  here is to visualize your requests status.
+***Found***  En la sección de encontrados puedes visualizar el estado de tus solicitudes sobre otros articulos.
 
-***Profile***  the section of profile will display your usage of the app, with some badges of consumption and money saving.
+***Profile***  En perfil encontrarás tu avance del uso de la app mostrandote insignias sobre tu consumo y dinero ahorrado.
+
 
 ## ¿Cómo usar la aplicación? ⚙️
 
